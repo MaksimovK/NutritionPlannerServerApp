@@ -1,0 +1,6 @@
+@NutritionPlanner_HostAddress = http://26.215.58.236:5107
+
+GET {{NutritionPlanner_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

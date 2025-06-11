@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "37nmktmuJHj9qXBIKzo4zAS5smX/bL90Xg5YYfcdSco=",
+  "Source": "NutritionPlanner.API",
+  "BasePath": "_content/NutritionPlanner.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

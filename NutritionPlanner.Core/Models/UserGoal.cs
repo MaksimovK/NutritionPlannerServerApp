@@ -1,0 +1,14 @@
+﻿namespace NutritionPlanner.Core.Models
+{
+    public class UserGoal
+    {
+        public int Id { get; set; }
+        public Guid UserId { get; set; }
+        public int GoalTypeId { get; set; }
+        public decimal Calories { get; set; }
+        public decimal Protein { get; set; }
+        public decimal Fat { get; set; }
+        public decimal Carbohydrates { get; set; }
+        public DateTime CreatedAt { get; set; }
+    }
+}
