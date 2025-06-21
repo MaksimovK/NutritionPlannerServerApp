@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using NutritionPlanner.Application.Services.Interfaces;
 using NutritionPlanner.Core.Models;
-using System.Drawing;
 
 namespace NutritionPlanner.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -23,15 +23,36 @@ namespace NutritionPlanner.API.Controllers
 
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetAllProducts(
-         int page = 0,
-         int size = 10)
+             int page = 0,
+             int size = 10,
+             [FromQuery] bool? highProtein = null,
+             [FromQuery] bool? lowCalorie = null,
+             [FromQuery] bool? highCalorie = null,
+             [FromQuery] bool? lowCarb = null,
+             [FromQuery] bool? highCarb = null,
+             [FromQuery] bool? lowFat = null,
+             [FromQuery] bool? highFat = null)
         {
             var currentUser = _currentUserService.GetCurrentUser();
+
+            var filter = new ProductFilter
+            {
+                HighProtein = highProtein,
+                LowCalorie = lowCalorie,
+                HighCalorie = highCalorie,
+                LowCarb = lowCarb,
+                HighCarb = highCarb,
+                LowFat = lowFat,
+                HighFat = highFat
+            };
+
             var products = await _productService.GetPaginatedProductsAsync(
-                page, size,
-                currentUser?.Id,
-                currentUser?.Role ?? Role.User
+                 page, size,
+                 currentUser?.Id,
+                 currentUser?.Role ?? Role.User,
+                 filter 
             );
+
             return Ok(products);
         }
 
@@ -83,27 +104,46 @@ namespace NutritionPlanner.API.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<List<Product>>> GetProductsByName([FromQuery] string? name)
+        public async Task<ActionResult<List<Product>>> GetProductsByName(
+             [FromQuery] string? name,
+             [FromQuery] bool? highProtein = null,
+             [FromQuery] bool? lowCalorie = null,
+             [FromQuery] bool? highCalorie = null,
+             [FromQuery] bool? lowCarb = null,
+             [FromQuery] bool? highCarb = null,
+             [FromQuery] bool? lowFat = null,
+             [FromQuery] bool? highFat = null)
         {
             var currentUser = _currentUserService.GetCurrentUser();
-            var userId = currentUser?.Id;
-            var role = currentUser?.Role ?? Role.User;
 
+            // Создаем фильтр из параметров запроса
+            var filter = new ProductFilter
+            {
+                HighProtein = highProtein,
+                LowCalorie = lowCalorie,
+                HighCalorie = highCalorie,
+                LowCarb = lowCarb,
+                HighCarb = highCarb,
+                LowFat = lowFat,
+                HighFat = highFat
+            };
 
             if (string.IsNullOrWhiteSpace(name))
             {
                 var products = await _productService.GetPaginatedProductsAsync(
-                     0, 5,
-                     currentUser?.Id,
-                     currentUser?.Role ?? Role.User
-                 );
+                    0, 5,
+                    currentUser?.Id,
+                    currentUser?.Role ?? Role.User,
+                    filter // Передаем фильтр
+                );
                 return Ok(products);
             }
 
             var matched = await _productService.GetProductsByNameAsync(
                 name.Trim(),
-                userId,
-                role
+                currentUser?.Id,
+                currentUser?.Role ?? Role.User,
+                filter // Передаем фильтр
             );
             return Ok(matched);
         }

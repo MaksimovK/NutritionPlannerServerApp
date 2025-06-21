@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NutritionPlanner.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f41efc269924b1df1390d604e99c9fb3379ab9d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c4d5877e161bcae6f526b3ec08c72c3530762850")]
 [assembly: System.Reflection.AssemblyProductAttribute("NutritionPlanner.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NutritionPlanner.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

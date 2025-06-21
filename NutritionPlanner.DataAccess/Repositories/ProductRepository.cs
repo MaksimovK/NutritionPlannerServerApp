@@ -26,10 +26,46 @@ namespace NutritionPlanner.DataAccess.Repositories
             return query;
         }
 
-        public async Task<List<ProductEntity>> GetPaginatedAsync(int page, int size, Guid? userId, Role userRole)
+        private IQueryable<ProductEntity> ApplyProductFilter(
+       IQueryable<ProductEntity> query,
+       ProductFilter filter)
+        {
+            if (filter == null) return query;
+
+            if (filter.HighProtein == true)
+                query = query.Where(p => p.Protein >= 20);
+
+            if (filter.LowCalorie == true)
+                query = query.Where(p => p.Calories <= 100);
+
+            if (filter.HighCalorie == true)
+                query = query.Where(p => p.Calories >= 300);
+
+            if (filter.LowCarb == true)
+                query = query.Where(p => p.Carbohydrates <= 10);
+
+            if (filter.HighCarb == true)
+                query = query.Where(p => p.Carbohydrates >= 50);
+
+            if (filter.LowFat == true)
+                query = query.Where(p => p.Fat <= 5);
+
+            if (filter.HighFat == true)
+                query = query.Where(p => p.Fat >= 20);
+
+            return query;
+        }
+
+        public async Task<List<ProductEntity>> GetPaginatedAsync(
+            int page,
+            int size,
+            Guid? userId,
+            Role userRole,
+            ProductFilter filter = null)
         {
             var query = _context.Products.AsQueryable();
             query = ApplyFilter(query, userId, userRole);
+            query = ApplyProductFilter(query, filter);
 
             return await query
                 .Skip(page * size)
@@ -93,27 +129,31 @@ namespace NutritionPlanner.DataAccess.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<List<ProductEntity>> GetByNameAsync(string name, Guid? userId, Role userRole)
+        public async Task<List<ProductEntity>> GetByNameAsync(
+        string name,
+        Guid? userId,
+        Role userRole,
+        ProductFilter filter = null)
         {
             var query = _context.Products
                 .Where(p => EF.Functions.Like(p.Name.ToLower(), $"%{name.ToLower()}%"))
                 .AsQueryable();
 
             query = ApplyFilter(query, userId, userRole);
+            query = ApplyProductFilter(query, filter);
+
             return await query.ToListAsync();
         }
 
         public async Task<ProductEntity?> GetByBarcodeAsync(string barcode, Guid? userId, Role userRole)
         {
-            var product = await _context.Products
-                .FirstOrDefaultAsync(p => p.Barcode == barcode);
+            var query = _context.Products
+                .Where(p => p.Barcode == barcode)
+                .AsQueryable();
 
-            if (product == null) return null;
-            if (userRole == Role.Admin) return product;
-            if (product.IsApproved) return product;
-            if (product.CreatedByUserId == userId) return product;
+            query = ApplyFilter(query, userId, userRole);
 
-            return null;
+            return await query.FirstOrDefaultAsync();
         }
 
         public async Task<List<ProductEntity>> GetUnapprovedAsync()

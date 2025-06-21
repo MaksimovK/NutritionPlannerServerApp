@@ -31,9 +31,15 @@ namespace NutritionPlanner.Application.Services
             };
         }
 
-        public async Task<List<Product>> GetPaginatedProductsAsync(int page, int size, Guid? userId, Role userRole)
+        public async Task<List<Product>> GetPaginatedProductsAsync(
+          int page,
+          int size,
+          Guid? userId,
+          Role userRole,
+          ProductFilter filter = null)
         {
-            var entities = await _repository.GetPaginatedAsync(page, size, userId, userRole);
+            var entities = await _repository.GetPaginatedAsync(
+                page, size, userId, userRole, filter);
             return entities.Select(MapToProduct).ToList();
         }
 
@@ -56,9 +62,14 @@ namespace NutritionPlanner.Application.Services
             return MapToProduct(entity);
         }
 
-        public async Task<List<Product>> GetProductsByNameAsync(string name, Guid? userId, Role userRole)
+        public async Task<List<Product>> GetProductsByNameAsync(
+         string name,
+         Guid? userId,
+         Role userRole,
+         ProductFilter filter = null)
         {
-            var entities = await _repository.GetByNameAsync(name, userId, userRole);
+            var entities = await _repository.GetByNameAsync(
+                name, userId, userRole, filter);
             return entities.Select(MapToProduct).ToList();
         }
 

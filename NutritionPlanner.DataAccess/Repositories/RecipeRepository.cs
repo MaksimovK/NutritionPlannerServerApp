@@ -67,5 +67,15 @@ namespace NutritionPlanner.DataAccess.Repositories
             recipe.IsApproved = true;
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<RecipeEntity>> GetByIdsAsync(List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+                return new List<RecipeEntity>();
+
+            return await _context.Recipes
+                .Where(r => ids.Contains(r.Id))
+                .ToListAsync();
+        }
     }
 }

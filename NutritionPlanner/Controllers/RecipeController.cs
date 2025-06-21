@@ -6,6 +6,7 @@ using NutritionPlanner.Core.Models;
 
 namespace NutritionPlanner.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RecipesController : ControllerBase
@@ -26,22 +27,59 @@ namespace NutritionPlanner.API.Controllers
         }
 
         [HttpGet]
-         public async Task<ActionResult<List<RecipeWithNutritionDto>>> GetAllRecipes()
+        public async Task<ActionResult<List<RecipeWithNutritionDto>>> GetAllRecipes(
+           [FromQuery] bool? highProtein = null,
+           [FromQuery] bool? lowCalorie = null,
+           [FromQuery] bool? highCalorie = null,
+           [FromQuery] bool? lowCarb = null,
+           [FromQuery] bool? highCarb = null,
+           [FromQuery] bool? lowFat = null,
+           [FromQuery] bool? highFat = null)
         {
-            var recipes = await _recipeService.GetAllAsync();
+            var filter = new RecipeFilter
+            {
+                HighProtein = highProtein,
+                LowCalorie = lowCalorie,
+                HighCalorie = highCalorie,
+                LowCarb = lowCarb,
+                HighCarb = highCarb,
+                LowFat = lowFat,
+                HighFat = highFat
+            };
+
+            var recipes = await _recipeService.GetAllAsync(filter);
             return Ok(recipes);
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<List<Recipe>>> SearchRecipes(string name)
+        public async Task<ActionResult<List<RecipeWithNutritionDto>>> SearchRecipes(
+         [FromQuery] string name,
+         [FromQuery] bool? highProtein = null,
+         [FromQuery] bool? lowCalorie = null,
+         [FromQuery] bool? highCalorie = null,
+         [FromQuery] bool? lowCarb = null,
+         [FromQuery] bool? highCarb = null,
+         [FromQuery] bool? lowFat = null,
+         [FromQuery] bool? highFat = null)
         {
-            var recipes = await _recipeService.SearchByNameAsync(name);
+            var filter = new RecipeFilter
+            {
+                HighProtein = highProtein,
+                LowCalorie = lowCalorie,
+                HighCalorie = highCalorie,
+                LowCarb = lowCarb,
+                HighCarb = highCarb,
+                LowFat = lowFat,
+                HighFat = highFat
+            };
+
+            var recipes = await _recipeService.SearchByNameAsync(name, filter);
             return Ok(recipes);
         }
 
         [HttpPost]
         public async Task<ActionResult<Recipe>> CreateRecipe(
-            [FromBody] RecipeCreateDto recipeDto)
+            [FromBody] RecipeDto recipeDto)
         {
             if (recipeDto == null)
             {
@@ -83,6 +121,13 @@ namespace NutritionPlanner.API.Controllers
         {
             await _recipeService.ApproveRecipeAsync(id);
             return NoContent();
+        }
+
+        [HttpPost("by-ids")]
+        public async Task<ActionResult<List<RecipeWithNutritionDto>>> GetRecipesByIds([FromBody] List<int> ids)
+        {
+            var recipes = await _recipeService.GetByIdsAsync(ids);
+            return Ok(recipes);
         }
     }
 }

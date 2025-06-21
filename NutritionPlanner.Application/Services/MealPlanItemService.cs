@@ -36,24 +36,10 @@ namespace NutritionPlanner.Application.Services
                 throw new ArgumentException($"Meal plan item with ID {id} not found.");
             }
 
-            var mealPlan = await _repository.GetMealPlanByIdAsync(mealPlanItem.MealPlanId);
-            if (mealPlan != null)
-            {
-                // Обновляем кбжу
-                var product = await _repository.GetProductByIdAsync(mealPlanItem.ProductId.Value);
-                if (product != null)
-                {
-                        
-                    mealPlan.TotalCalories -= product.Calories * mealPlanItem.Amount;
-                    mealPlan.TotalProtein -= product.Protein * mealPlanItem.Amount;
-                    mealPlan.TotalFat -= product.Fat * mealPlanItem.Amount;
-                    mealPlan.TotalCarbohydrates -= product.Carbohydrates * mealPlanItem.Amount;
-                }
-
-                await _repository.UpdateMealPlanAsync(mealPlan);
-            }
-
+            var mealPlanId = mealPlanItem.MealPlanId;
             await _repository.DeleteAsync(mealPlanItem.Id);
+
+            await RecalculateMealPlanNutrition(mealPlanId);
         }
 
         public async Task<int> AddMealPlanItemAsync(MealPlanItem mealPlanItem)
@@ -184,6 +170,7 @@ namespace NutritionPlanner.Application.Services
 
             // Сохраняем старые данные для корректного перерасчёта кБЖУ
             var oldProductId = mealPlanItemEntity.ProductId;
+            var oldRecipeId = mealPlanItemEntity.RecipeId;
             var oldAmount = mealPlanItemEntity.Amount;
 
             // Обновляем поля MealPlanItem
@@ -193,36 +180,7 @@ namespace NutritionPlanner.Application.Services
 
             await _repository.UpdateAsync(mealPlanItemEntity);
 
-            // Перерасчёт кБЖУ для MealPlan
-            var mealPlan = await _repository.GetMealPlanByIdAsync(mealPlanItem.MealPlanId);
-
-            if (mealPlan == null)
-            {
-                throw new ArgumentException("Meal plan not found");
-            }
-
-            // Обнуляем кБЖУ перед перерасчётом
-            mealPlan.TotalCalories = 0;
-            mealPlan.TotalProtein = 0;
-            mealPlan.TotalFat = 0;
-            mealPlan.TotalCarbohydrates = 0;
-
-            // Перебираем все MealPlanItems для данного MealPlan
-            foreach (var item in mealPlan.MealPlanItems)
-            {
-                var product = await _repository.GetProductByIdAsync(item.ProductId.Value);
-                if (product != null)
-                {
-                    var multiplier = item.Amount;
-                    mealPlan.TotalCalories += product.Calories * multiplier;
-                    mealPlan.TotalProtein += product.Protein * multiplier;
-                    mealPlan.TotalFat += product.Fat * multiplier;
-                    mealPlan.TotalCarbohydrates += product.Carbohydrates * multiplier;
-                }
-            }
-
-            // Обновляем MealPlan в базе данных
-            await _repository.UpdateMealPlanAsync(mealPlan);
+            await RecalculateMealPlanNutrition(mealPlanItem.MealPlanId);
         }
     }
 }

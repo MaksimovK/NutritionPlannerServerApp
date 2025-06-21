@@ -34,5 +34,9 @@ namespace NutritionPlanner.DataAccess.Entities
 
         [ForeignKey("ReceiverId")]
         public virtual UserEntity Receiver { get; set; }
+
+        //[Required]
+        //[StringLength(24)] // IV всегда 16 байт -> base64 = 24 символа
+        //public string IV { get; set; } // Вектор инициализации
     }
 }

@@ -7,5 +7,7 @@ namespace NutritionPlanner.Application.Services.Interfaces
         Task<Guid> CreateUserAsync(User user);
         Task<User> GetUserByIdAsync(Guid userId);
         Task UpdateUserAsync(User user);
+        Task<IEnumerable<User>> GetAllUsersAsync();
+        Task UpdateUserRoleAsync(Guid userId, Role newRole);
     }
 }

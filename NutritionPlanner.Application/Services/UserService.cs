@@ -108,5 +108,28 @@ namespace NutritionPlanner.Application.Services
                 }
             }
         }
+
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        {
+            var users = await _userRepository.GetAllAsync();
+            return users.Select(u => new User
+            {
+                Id = u.Id,
+                Name = u.Name,
+                Email = u.Email,
+                Role = u.Role,
+                CreatedAt = u.CreatedAt
+            });
+        }
+
+        public async Task UpdateUserRoleAsync(Guid userId, Role newRole)
+        {
+            var user = await _userRepository.GetByIdAsync(userId);
+            if (user == null)
+                throw new KeyNotFoundException($"User with ID {userId} not found");
+
+            user.Role = newRole;
+            await _userRepository.UpdateAsync(user);
+        }
     }
 }

@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NutritionPlanner.Application.Services.Interfaces;
 using NutritionPlanner.Core.Models;
 
 namespace NutritionPlanner.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -58,20 +60,25 @@ namespace NutritionPlanner.API.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
+        {
+            var users = await _userService.GetAllUsersAsync();
+            return Ok(users);
+        }
+
+
         [HttpPut("{id}/role")]
         public async Task<ActionResult> UpdateUserRole(Guid id, [FromBody] RoleUpdateRequest request)
         {
             try
             {
-                var user = await _userService.GetUserByIdAsync(id);
-                if (user == null)
-                {
-                    return NotFound(new { Message = "User not found" });
-                }
-
-                user.Role = request.NewRole;
-                await _userService.UpdateUserAsync(user);
+                await _userService.UpdateUserRoleAsync(id, request.NewRole);
                 return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { Message = ex.Message });
             }
             catch (Exception ex)
             {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using NutritionPlanner.Core.Models;
 using NutritionPlanner.Application.Services.Interfaces;
+using System.Security.Claims;
 
 namespace NutritionPlanner.Application.Services
 {
@@ -16,25 +17,26 @@ namespace NutritionPlanner.Application.Services
         public User? GetCurrentUser()
         {
             var context = _httpContextAccessor.HttpContext;
-            if (context?.Request?.Headers == null) return null;
+            if (context?.User?.Identity?.IsAuthenticated != true)
+                return null;
 
-            // Получаем заголовки
-            var userIdHeader = context.Request.Headers["X-User-Id"].FirstOrDefault();
-            var tokenHeader = context.Request.Headers["X-Auth-Token"].FirstOrDefault();
+            var userIdClaim = context.User.FindFirst(ClaimTypes.NameIdentifier);
+            var roleClaim = context.User.FindFirst(ClaimTypes.Role);
 
-            if (!string.IsNullOrEmpty(userIdHeader) && Guid.TryParse(userIdHeader, out var userId))
+            if (userIdClaim == null || roleClaim == null)
+                return null;
+
+            if (!Guid.TryParse(userIdClaim.Value, out var userId))
+                return null;
+
+            if (!Enum.TryParse<Role>(roleClaim.Value, out var role))
+                return null;
+
+            return new User
             {
-                // В реальном приложении здесь должна быть проверка токена
-                return new User
-                {
-                    Id = userId,
-                    Role = Enum.TryParse<Role>(context.Request.Headers["X-User-Role"].FirstOrDefault(), out var role)
-                        ? role
-                        : Role.User
-                };
-            }
-
-            return null;
+                Id = userId,
+                Role = role
+            };
         }
     }
 }

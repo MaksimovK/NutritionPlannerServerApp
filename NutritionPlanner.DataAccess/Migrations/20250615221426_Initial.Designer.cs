@@ -12,8 +12,8 @@ using NutritionPlanner.DataAccess;
 namespace NutritionPlanner.DataAccess.Migrations
 {
     [DbContext(typeof(NutritionPlannerDbContext))]
-    [Migration("20250608172338_addReicpes")]
-    partial class addReicpes
+    [Migration("20250615221426_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

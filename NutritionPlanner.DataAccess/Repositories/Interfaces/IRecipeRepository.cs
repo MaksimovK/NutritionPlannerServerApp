@@ -12,5 +12,6 @@ namespace NutritionPlanner.DataAccess.Repositories.Interfaces
         Task<List<RecipeEntity>> SearchByNameAsync(string name);
         Task<List<RecipeEntity>> GetUnapprovedAsync();
         Task ApproveAsync(int id);
+        Task<List<RecipeEntity>> GetByIdsAsync(List<int> ids);
     }
 }

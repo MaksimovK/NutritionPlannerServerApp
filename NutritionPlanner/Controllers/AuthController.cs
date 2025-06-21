@@ -51,7 +51,7 @@ namespace NutritionPlanner.API.Controllers
                 {
                     UserId = userId,
                     Token = token,
-                    UserRole = user.Role.ToString() 
+                    UserRole = (int)user.Role
                 });
             }
             catch (InvalidOperationException ex)
@@ -80,7 +80,7 @@ namespace NutritionPlanner.API.Controllers
                 {
                     Token = token,
                     UserId = user.Id,
-                    UserRole = user.Role.ToString()
+                    UserRole = (int)user.Role
                 });
             }
             catch (UnauthorizedAccessException ex)

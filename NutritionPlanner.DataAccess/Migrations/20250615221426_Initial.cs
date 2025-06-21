@@ -103,7 +103,9 @@ namespace NutritionPlanner.DataAccess.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false)
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    IsApproved = table.Column<bool>(type: "boolean", nullable: false),
+                    CreatedByUserId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -305,7 +307,7 @@ namespace NutritionPlanner.DataAccess.Migrations
                 columns: new[] { "Id", "Barcode", "Calories", "Carbohydrates", "CreatedByUserId", "Fat", "IsApproved", "Name", "Protein", "Weight" },
                 values: new object[,]
                 {
-                    { 1, null, 77m, 0.3m, null, 5.6m, true, "Яйца", 6.2m, 100m },
+                    { 1, null, 77m, 0.3m, null, 5.6m, true, "Яйцо куринное", 6.2m, 100m },
                     { 2, null, 160m, 8.5m, null, 14.7m, true, "Авокадо", 2.0m, 100m },
                     { 3, null, 70m, 13.0m, null, 0.5m, true, "Хлеб цельнозерновой", 3.0m, 100m },
                     { 4, null, 579m, 21.6m, null, 49.9m, true, "Миндаль", 21.2m, 100m },
@@ -361,14 +363,14 @@ namespace NutritionPlanner.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Recipes",
-                columns: new[] { "Id", "Description", "Name" },
+                columns: new[] { "Id", "CreatedByUserId", "Description", "IsApproved", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Питательный завтрак с яйцами и авокадо", "Омлет с авокадо" },
-                    { 2, "Легкий и полезный обед", "Салат с курицей и овощами" },
-                    { 3, "Вегетарианский ужин", "Гречневая каша с овощами" },
-                    { 4, "Освежающий перекус", "Фруктовый смузи" },
-                    { 5, "Полезный ужин с рыбой", "Запеченный лосось с картофелем" }
+                    { 1, null, "Питательный завтрак с яйцами и авокадо", true, "Омлет с авокадо" },
+                    { 2, null, "Легкий и полезный обед", true, "Салат с курицей и овощами" },
+                    { 3, null, "Вегетарианский ужин", true, "Гречневая каша с овощами" },
+                    { 4, null, "Освежающий перекус", true, "Фруктовый смузи" },
+                    { 5, null, "Полезный ужин с рыбой", true, "Запеченный лосось с картофелем" }
                 });
 
             migrationBuilder.InsertData(

@@ -1,4 +1,5 @@
-﻿using NutritionPlanner.Application.Services.Interfaces;
+﻿using Microsoft.Extensions.Configuration;
+using NutritionPlanner.Application.Services.Interfaces;
 using NutritionPlanner.Core.Models;
 using NutritionPlanner.DataAccess.Entities;
 using NutritionPlanner.DataAccess.Repositories.Interfaces;
@@ -10,7 +11,10 @@ namespace NutritionPlanner.Application.Services
         private readonly IChatRepository _chatRepository;
         private readonly IUsersRepository _usersRepository;
 
-        public ChatService(IChatRepository chatRepository, IUsersRepository usersRepository)
+        public ChatService(
+         IChatRepository chatRepository,
+         IUsersRepository usersRepository,
+         IConfiguration config)
         {
             _chatRepository = chatRepository;
             _usersRepository = usersRepository;
@@ -46,7 +50,7 @@ namespace NutritionPlanner.Application.Services
                 Id = m.Id,
                 SenderId = m.SenderId,
                 ReceiverId = m.ReceiverId,
-                Content = m.Content,
+                Content = m.Content, 
                 SentAt = m.SentAt,
                 IsRead = m.IsRead
             });

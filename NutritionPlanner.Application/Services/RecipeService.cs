@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using NutritionPlanner.Application.Services.Interfaces;
-using NutritionPlanner.Core.DTO;
+﻿using NutritionPlanner.Application.Services.Interfaces;
 using NutritionPlanner.Core.DTO.NutritionPlanner.Core.Models;
 using NutritionPlanner.Core.Models;
 using NutritionPlanner.DataAccess.Entities;
@@ -27,7 +22,7 @@ namespace NutritionPlanner.Application.Services
             _currentUserService = currentUserService;
         }
 
-        public async Task<List<RecipeWithNutritionDto>> GetAllAsync()
+        public async Task<List<RecipeWithNutritionDto>> GetAllAsync(RecipeFilter filter)
         {
             var currentUser = _currentUserService.GetCurrentUser();
             var role = currentUser?.Role ?? Role.User;
@@ -43,7 +38,8 @@ namespace NutritionPlanner.Application.Services
                 || (r.CreatedByUserId == userId)
             ).ToList();
 
-            return await MapWithNutritionAsync(filtered);
+            var result = await MapWithNutritionAsync(filtered);
+            return ApplyRecipeFilter(result, filter);
         }
 
         public async Task<RecipeWithNutritionDto> GetByIdAsync(int id)
@@ -67,7 +63,7 @@ namespace NutritionPlanner.Application.Services
             return list.FirstOrDefault();
         }
 
-        public async Task<RecipeWithNutritionDto> CreateRecipeAsync(RecipeCreateDto dto)
+        public async Task<RecipeWithNutritionDto> CreateRecipeAsync(RecipeDto dto)
         {
             var currentUser = _currentUserService.GetCurrentUser();
             if (currentUser == null)
@@ -99,7 +95,7 @@ namespace NutritionPlanner.Application.Services
             return await GetByIdAsync(entity.Id);
         }
 
-        public async Task<List<RecipeWithNutritionDto>> SearchByNameAsync(string name)
+        public async Task<List<RecipeWithNutritionDto>> SearchByNameAsync(string name, RecipeFilter filter)
         {
             var currentUser = _currentUserService.GetCurrentUser();
             var role = currentUser?.Role ?? Role.User;
@@ -112,7 +108,8 @@ namespace NutritionPlanner.Application.Services
                 || r.CreatedByUserId == userId
             ).ToList();
 
-            return await MapWithNutritionAsync(filtered);
+            var result = await MapWithNutritionAsync(filtered);
+            return ApplyRecipeFilter(result, filter);
         }
 
         public async Task<List<RecipeWithNutritionDto>> GetUnapprovedRecipesAsync()
@@ -142,6 +139,26 @@ namespace NutritionPlanner.Application.Services
                 throw new UnauthorizedAccessException("Доступ запрещён");
 
             await _recipeRepository.DeleteAsync(id);
+        }
+
+        public async Task<List<RecipeWithNutritionDto>> GetByIdsAsync(List<int> ids)
+        {
+            if (ids == null || ids.Count == 0)
+                return new List<RecipeWithNutritionDto>();
+
+            var entities = await _recipeRepository.GetByIdsAsync(ids);
+
+            var currentUser = _currentUserService.GetCurrentUser();
+            var role = currentUser?.Role ?? Role.User;
+            var userId = currentUser?.Id;
+
+            var filtered = entities.Where(r =>
+                r.IsApproved
+                || (role == Role.Admin)
+                || (r.CreatedByUserId == userId)
+            ).ToList();
+
+            return await MapWithNutritionAsync(filtered);
         }
 
         // Вспомогательный метод для расчёта КБЖУ и маппинга
@@ -198,11 +215,45 @@ namespace NutritionPlanner.Application.Services
                     ProteinPer100g = Math.Round(totProt * norm, 2),
                     FatPer100g = Math.Round(totFat * norm, 2),
                     CarbohydratesPer100g = Math.Round(totCarb * norm, 2),
-                    Ingredients = dtos
+                    Ingredients = dtos,
+                    IsApproved = r.IsApproved,
+                    CreatedByUserId = r.CreatedByUserId
                 });
             }
 
             return result;
+        }
+        private List<RecipeWithNutritionDto> ApplyRecipeFilter(
+        List<RecipeWithNutritionDto> recipes,
+        RecipeFilter filter)
+        {
+            if (filter == null) return recipes;
+
+            var query = recipes.AsQueryable();
+
+            // Применяем фильтры только если они true
+            if (filter.HighProtein == true)
+                query = query.Where(r => r.ProteinPer100g >= 20);
+
+            if (filter.LowCalorie == true)
+                query = query.Where(r => r.CaloriesPer100g <= 100);
+
+            if (filter.HighCalorie == true)
+                query = query.Where(r => r.CaloriesPer100g >= 300);
+
+            if (filter.LowCarb == true)
+                query = query.Where(r => r.CarbohydratesPer100g <= 10);
+
+            if (filter.HighCarb == true)
+                query = query.Where(r => r.CarbohydratesPer100g >= 50);
+
+            if (filter.LowFat == true)
+                query = query.Where(r => r.FatPer100g <= 5);
+
+            if (filter.HighFat == true)
+                query = query.Where(r => r.FatPer100g >= 20);
+
+            return query.ToList();
         }
     }
 }

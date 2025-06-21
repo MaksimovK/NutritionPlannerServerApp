@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NutritionPlanner.Application.Services.Interfaces;
 using NutritionPlanner.Core.Models;
 
 namespace NutritionPlanner.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RecipeIngredientsController : ControllerBase

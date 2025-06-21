@@ -1,9 +1,15 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "NutritionPlanner.API",
-    "version": "1.0"
+    "title": "NutritionPlanner API",
+    "version": "v1"
   },
+  "servers": [
+    {
+      "url": "http://192.168.0.195:7086",
+      "description": "(HTTPS)"
+    }
+  ],
   "paths": {
     "/api/ActivityLevels": {
       "get": {
@@ -1168,6 +1174,55 @@
               "format": "int32",
               "default": 10
             }
+          },
+          {
+            "name": "highProtein",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lowCalorie",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "highCalorie",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lowCarb",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "highCarb",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lowFat",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "highFat",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "responses": {
@@ -1433,6 +1488,55 @@
             "in": "query",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "highProtein",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lowCalorie",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "highCalorie",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lowCarb",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "highCarb",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lowFat",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "highFat",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
             }
           }
         ],
@@ -1735,6 +1839,57 @@
         "tags": [
           "Recipes"
         ],
+        "parameters": [
+          {
+            "name": "highProtein",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lowCalorie",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "highCalorie",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lowCarb",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "highCarb",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lowFat",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "highFat",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1775,17 +1930,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RecipeCreateDto"
+                "$ref": "#/components/schemas/RecipeDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RecipeCreateDto"
+                "$ref": "#/components/schemas/RecipeDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RecipeCreateDto"
+                "$ref": "#/components/schemas/RecipeDto"
               }
             }
           }
@@ -1826,6 +1981,55 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "highProtein",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lowCalorie",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "highCalorie",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lowCarb",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "highCarb",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "lowFat",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "highFat",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "responses": {
@@ -1836,7 +2040,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Recipe"
+                    "$ref": "#/components/schemas/RecipeWithNutritionDto"
                   }
                 }
               },
@@ -1844,7 +2048,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Recipe"
+                    "$ref": "#/components/schemas/RecipeWithNutritionDto"
                   }
                 }
               },
@@ -1852,7 +2056,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Recipe"
+                    "$ref": "#/components/schemas/RecipeWithNutritionDto"
                   }
                 }
               }
@@ -1918,6 +2122,75 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Recipes/by-ids": {
+      "post": {
+        "tags": [
+          "Recipes"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RecipeWithNutritionDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RecipeWithNutritionDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RecipeWithNutritionDto"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -2288,6 +2561,42 @@
                 "schema": {
                   "type": "integer",
                   "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
                 }
               }
             }
@@ -2750,7 +3059,7 @@
         },
         "additionalProperties": false
       },
-      "RecipeCreateDto": {
+      "RecipeDto": {
         "type": "object",
         "properties": {
           "name": {
@@ -2864,6 +3173,14 @@
             "items": {
               "$ref": "#/components/schemas/RecipeIngredientDto"
             },
+            "nullable": true
+          },
+          "isApproved": {
+            "type": "boolean"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid",
             "nullable": true
           }
         },
@@ -3162,6 +3479,19 @@
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Please enter token",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
 }
