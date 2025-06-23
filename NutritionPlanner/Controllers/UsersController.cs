@@ -86,6 +86,42 @@ namespace NutritionPlanner.API.Controllers
             }
         }
 
+        [HttpPost("{id}/block")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> BlockUser(Guid id, [FromBody] BlockUserRequest request)
+        {
+            try
+            {
+                await _userService.BlockUserAsync(id, request.BlockedUntil, request.Reason);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = ex.Message });
+            }
+        }
+
+        [HttpPost("{id}/unblock")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UnblockUser(Guid id)
+        {
+            try
+            {
+                await _userService.UnblockUserAsync(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = ex.Message });
+            }
+        }
+
+        public class BlockUserRequest
+        {
+            public DateTime BlockedUntil { get; set; }
+            public string? Reason { get; set; }
+        }
+
         public class RoleUpdateRequest
         {
             public Role NewRole { get; set; }

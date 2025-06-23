@@ -49,5 +49,11 @@ namespace NutritionPlanner.DataAccess.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<bool> ExistsAsync(Guid userId, DateOnly date)
+        {
+            return await _context.UserProgress
+                .AnyAsync(up => up.UserId == userId && up.Date == date);
+        }
     }
 }

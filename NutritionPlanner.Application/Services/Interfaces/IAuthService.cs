@@ -6,7 +6,6 @@ namespace NutritionPlanner.Application.Services.Interfaces
     {
         Task<string> AuthenticateUserAsync(string login, string password);
         Task<Guid> RegisterUserAsync(RegisterRequest request);
-
         Task<UserEntity> GetUserByEmailAsync(string email);
 
     }

@@ -12,5 +12,7 @@ namespace NutritionPlanner.DataAccess.Repositories.Interfaces
         Task UpdateAsync(UserEntity user);
         Task<IEnumerable<UserEntity>> GetByRoleAsync(Role role);
         Task<IEnumerable<UserEntity>> GetAllAsync();
+        Task BlockUserAsync(Guid userId, DateTime blockedUntil, string reason);
+        Task UnblockUserAsync(Guid userId);
     }
 }

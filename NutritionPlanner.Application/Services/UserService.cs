@@ -36,7 +36,10 @@ namespace NutritionPlanner.Application.Services
                 ActivityLevelId = userEntity.ActivityLevelId,
                 PasswordHash = userEntity.PasswordHash,
                 CreatedAt = userEntity.CreatedAt,
-                Role = userEntity.Role
+                Role = userEntity.Role,
+                IsBlocked = userEntity.IsBlocked,
+                BlockedUntil = userEntity.BlockedUntil,
+                BlockReason = userEntity.BlockReason
             };
         }
 
@@ -55,7 +58,10 @@ namespace NutritionPlanner.Application.Services
                 ActivityLevelId = user.ActivityLevelId,
                 PasswordHash = user.PasswordHash,
                 CreatedAt = user.CreatedAt,
-                Role = user.Role
+                Role = user.Role,
+                IsBlocked = user.IsBlocked,
+                BlockedUntil = user.BlockedUntil, 
+                BlockReason = user.BlockReason
             };
             await _userRepository.CreateAsync(userEntity);
             return userEntity.Id;
@@ -87,6 +93,9 @@ namespace NutritionPlanner.Application.Services
             userEntity.ActivityLevelId = user.ActivityLevelId;
             userEntity.PasswordHash = user.PasswordHash;
             userEntity.Role = user.Role;
+            userEntity.IsBlocked = user.IsBlocked;
+            userEntity.BlockedUntil = user.BlockedUntil;
+            userEntity.BlockReason = user.BlockReason;
 
             await _userRepository.UpdateAsync(userEntity);
 
@@ -118,7 +127,10 @@ namespace NutritionPlanner.Application.Services
                 Name = u.Name,
                 Email = u.Email,
                 Role = u.Role,
-                CreatedAt = u.CreatedAt
+                CreatedAt = u.CreatedAt,
+                IsBlocked = u.IsBlocked,
+                BlockedUntil = u.BlockedUntil,
+                BlockReason = u.BlockReason
             });
         }
 
@@ -130,6 +142,16 @@ namespace NutritionPlanner.Application.Services
 
             user.Role = newRole;
             await _userRepository.UpdateAsync(user);
+        }
+
+        public async Task BlockUserAsync(Guid userId, DateTime blockedUntil, string reason)
+        {
+            await _userRepository.BlockUserAsync(userId, blockedUntil, reason);
+        }
+
+        public async Task UnblockUserAsync(Guid userId)
+        {
+            await _userRepository.UnblockUserAsync(userId);
         }
     }
 }

@@ -61,5 +61,33 @@ namespace NutritionPlanner.DataAccess.Repositories
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
+
+        public async Task BlockUserAsync(Guid userId, DateTime blockedUntil, string reason)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user != null)
+            {
+                if (user.Role == Role.Admin)
+                {
+                    throw new InvalidOperationException("Cannot block administrators");
+                }
+
+                user.IsBlocked = true;
+                user.BlockedUntil = blockedUntil;
+                user.BlockReason = reason; 
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task UnblockUserAsync(Guid userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user != null)
+            {
+                user.IsBlocked = false;
+                user.BlockedUntil = null;
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

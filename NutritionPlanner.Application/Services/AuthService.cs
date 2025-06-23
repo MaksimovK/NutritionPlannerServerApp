@@ -8,6 +8,7 @@ using NutritionPlanner.Application.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.ComponentModel.DataAnnotations;
 using NutritionPlanner.Core.Models;
+using NutritionPlanner.DataAccess.Repositories;
 
 namespace NutritionPlanner.Application.Services
 {
@@ -15,11 +16,13 @@ namespace NutritionPlanner.Application.Services
     {
         private readonly IAuthRepository _authRepository;
         private readonly IConfiguration _configuration;
+        private readonly IUsersRepository _userRepository;
 
-        public AuthService(IAuthRepository authRepository, IConfiguration configuration)
+        public AuthService(IAuthRepository authRepository, IConfiguration configuration, IUsersRepository usersRepository)
         {
             _authRepository = authRepository;
             _configuration = configuration;
+            _userRepository = usersRepository;
         }
 
         public async Task<Guid> RegisterUserAsync(RegisterRequest request)
@@ -53,6 +56,36 @@ namespace NutritionPlanner.Application.Services
             if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
                 throw new UnauthorizedAccessException("Неверный email или пароль.");
 
+            if (user.IsBlocked)
+            {
+                if (user.BlockedUntil.HasValue && user.BlockedUntil <= DateTime.UtcNow)
+                {
+                    user.IsBlocked = false;
+                    user.BlockedUntil = null;
+                    user.BlockReason = null;
+                    await _userRepository.UpdateAsync(user);
+                }
+                else
+                {
+                    var message = "Ваш аккаунт заблокирован";
+                    bool hasDate = user.BlockedUntil.HasValue;
+                    bool hasReason = !string.IsNullOrEmpty(user.BlockReason);
+
+                    if (hasDate)
+                    {
+                        message += $" до {user.BlockedUntil.Value:dd.MM.yyyy HH:mm}";
+                    }
+
+                    if (hasReason)
+                    {
+                        message += hasDate ? ". " : " ";
+                        message += $"Причина: {user.BlockReason}";
+                    }
+
+                    throw new UnauthorizedAccessException(message);
+                }
+            }
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]);
 
@@ -73,7 +106,7 @@ namespace NutritionPlanner.Application.Services
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token); // Возвращаем реальный JWT
+            return tokenHandler.WriteToken(token);
         }
 
         public async Task<UserEntity> GetUserByEmailAsync(string email)

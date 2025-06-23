@@ -27,8 +27,27 @@ namespace NutritionPlanner.API.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> CreateUserProgress(UserProgress progress)
         {
-            var progressId = await _userProgressService.AddUserProgressAsync(progress);
-            return CreatedAtAction(nameof(GetProgressByUserId), new { userId = progress.UserId }, progressId);
+            try
+            {
+                var progressId = await _userProgressService.AddUserProgressAsync(progress);
+
+                // Возвращаем 200 OK при обновлении и 201 Created при создании
+                var existing = await _userProgressService.GetProgressByUserIdAndDateAsync(progress.UserId, progress.Date);
+                if (existing != null && existing.Id == progressId)
+                {
+                    return Ok(progressId);
+                }
+
+                return CreatedAtAction(
+                    nameof(GetProgressByUserIdAndDate),
+                    new { userId = progress.UserId, date = progress.Date },
+                    progressId
+                );
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpGet("{userId}/{date}")]

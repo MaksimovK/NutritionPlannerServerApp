@@ -30,5 +30,8 @@ namespace NutritionPlanner.DataAccess.Entities
 
         [Required]
         public Role Role { get; set; } = Role.User;
+        public bool IsBlocked { get; set; } = false;
+        public DateTime? BlockedUntil { get; set; } = null;
+        public string? BlockReason { get; set; } = string.Empty;
     }
 }

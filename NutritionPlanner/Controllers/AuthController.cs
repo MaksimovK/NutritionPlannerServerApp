@@ -85,7 +85,7 @@ namespace NutritionPlanner.API.Controllers
             }
             catch (UnauthorizedAccessException ex)
             {
-                return Unauthorized(new { Error = ex.Message });
+                return StatusCode(403, new { Error = ex.Message });
             }
             catch (Exception ex)
             {

@@ -2646,6 +2646,71 @@
         }
       }
     },
+    "/api/Users/{id}/block": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlockUserRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlockUserRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlockUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Users/{id}/unblock": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/WeeklyMenus/{goalTypeId}": {
       "get": {
         "tags": [
@@ -2789,6 +2854,20 @@
           "amount": {
             "type": "number",
             "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BlockUserRequest": {
+        "type": "object",
+        "properties": {
+          "blockedUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3314,6 +3393,18 @@
           },
           "role": {
             "$ref": "#/components/schemas/Role"
+          },
+          "isBlocked": {
+            "type": "boolean"
+          },
+          "blockedUntil": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "blockReason": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

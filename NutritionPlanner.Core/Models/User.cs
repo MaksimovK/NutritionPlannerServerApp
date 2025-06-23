@@ -13,5 +13,8 @@
         public string PasswordHash { get; set; }
         public DateTime CreatedAt { get; set; }
         public Role Role { get; set; }
+        public bool IsBlocked { get; set; }
+        public DateTime? BlockedUntil { get; set; }
+        public string BlockReason { get; set; }
     }
 }

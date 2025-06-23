@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using NutritionPlanner.DataAccess;
@@ -11,9 +12,11 @@ using NutritionPlanner.DataAccess;
 namespace NutritionPlanner.DataAccess.Migrations
 {
     [DbContext(typeof(NutritionPlannerDbContext))]
-    partial class NutritionPlannerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250622191013_AddBlockUsers")]
+    partial class AddBlockUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1126,9 +1129,6 @@ namespace NutritionPlanner.DataAccess.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("integer");
-
-                    b.Property<string>("BlockReason")
-                        .HasColumnType("text");
 
                     b.Property<DateTime?>("BlockedUntil")
                         .HasColumnType("timestamp with time zone");

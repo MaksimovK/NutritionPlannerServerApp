@@ -38,32 +38,38 @@ namespace NutritionPlanner.Application.Services
 
         public async Task<int> AddUserProgressAsync(UserProgress progress)
         {
-            // Пытаемся найти существующий прогресс для этого пользователя на эту дату
-            var existingProgress = await _repository.GetProgressByUserIdAndDateAsync(progress.UserId, progress.Date);
-            if (existingProgress != null)
-            {
-                // Если прогресс есть, обновляем его
-                existingProgress.CaloriesConsumed = progress.CaloriesConsumed;
-                existingProgress.ProteinConsumed = progress.ProteinConsumed;
-                existingProgress.FatConsumed = progress.FatConsumed;
-                existingProgress.CarbohydratesConsumed = progress.CarbohydratesConsumed;
-                // Здесь можно обновить и другие параметры (вода, активность)
+            var exists = await _repository.ExistsAsync(progress.UserId, progress.Date);
 
-                await _repository.UpdateAsync(existingProgress);
-                return existingProgress.Id;
+            if (exists)
+            {
+                var existing = await _repository.GetProgressByUserIdAndDateAsync(progress.UserId, progress.Date);
+
+                // Обновляем существующую запись
+                existing.Weight = progress.Weight;
+                existing.CaloriesConsumed = progress.CaloriesConsumed;
+                existing.ProteinConsumed = progress.ProteinConsumed;
+                existing.FatConsumed = progress.FatConsumed;
+                existing.CarbohydratesConsumed = progress.CarbohydratesConsumed;
+                existing.WaterConsumed = progress.WaterConsumed;
+                existing.ActivityMinutes = progress.ActivityMinutes;
+
+                await _repository.UpdateAsync(existing);
+                return existing.Id;
             }
             else
             {
-                // Если прогресса нет, создаем новый
+                // Создаем новую запись
                 var progressEntity = new UserProgressEntity
                 {
                     UserId = progress.UserId,
                     Date = progress.Date,
+                    Weight = progress.Weight,
                     CaloriesConsumed = progress.CaloriesConsumed,
                     ProteinConsumed = progress.ProteinConsumed,
                     FatConsumed = progress.FatConsumed,
                     CarbohydratesConsumed = progress.CarbohydratesConsumed,
-                    // Добавь другие поля
+                    WaterConsumed = progress.WaterConsumed,
+                    ActivityMinutes = progress.ActivityMinutes
                 };
 
                 return await _repository.CreateAsync(progressEntity);
