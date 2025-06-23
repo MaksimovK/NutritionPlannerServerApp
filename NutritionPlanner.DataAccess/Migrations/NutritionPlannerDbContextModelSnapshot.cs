@@ -93,6 +93,11 @@ namespace NutritionPlanner.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("IV")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("character varying(24)");
+
                     b.Property<bool>("IsRead")
                         .HasColumnType("boolean");
 

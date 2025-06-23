@@ -166,7 +166,10 @@ namespace NutritionPlanner.DataAccess.Migrations
                     ActivityLevelId = table.Column<int>(type: "integer", nullable: false),
                     PasswordHash = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Role = table.Column<int>(type: "integer", nullable: false)
+                    Role = table.Column<int>(type: "integer", nullable: false),
+                    IsBlocked = table.Column<bool>(type: "boolean", nullable: false),
+                    BlockedUntil = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    BlockReason = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -250,7 +253,8 @@ namespace NutritionPlanner.DataAccess.Migrations
                     ReceiverId = table.Column<Guid>(type: "uuid", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: false),
                     SentAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    IsRead = table.Column<bool>(type: "boolean", nullable: false)
+                    IsRead = table.Column<bool>(type: "boolean", nullable: false),
+                    IV = table.Column<string>(type: "character varying(24)", maxLength: 24, nullable: false)
                 },
                 constraints: table =>
                 {

@@ -2897,6 +2897,10 @@
           },
           "isRead": {
             "type": "boolean"
+          },
+          "iv": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

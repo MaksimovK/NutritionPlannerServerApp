@@ -12,7 +12,7 @@ namespace NutritionPlanner.API.Controllers
     {
         private readonly IChatService _chatService;
 
-        public ChatController(IChatService chatService)
+        public ChatController(IChatService chatService) 
         {
             _chatService = chatService;
         }

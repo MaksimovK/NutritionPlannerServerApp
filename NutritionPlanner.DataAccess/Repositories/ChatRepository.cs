@@ -60,7 +60,6 @@ namespace NutritionPlanner.DataAccess.Repositories
                 .ToListAsync();
 
             return senders.Concat(receivers)
-                .Where(u => u.Role == Role.User) // Только обычные пользователи
                 .GroupBy(u => u.Id)
                 .Select(g => g.First())
                 .ToList();

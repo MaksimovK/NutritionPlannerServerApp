@@ -6,49 +6,52 @@ namespace NutritionPlanner.Application.Services
     public class EncryptionService
     {
         private readonly byte[] _key;
-        private const int IV_SIZE = 16; // 128 бит для AES
 
-        public EncryptionService(byte[] key) => _key = key;
-
-        public (string CipherText, string IV) Encrypt(string plainText)
+        public EncryptionService(byte[] key)
         {
-            using var aes = Aes.Create();
-            aes.Key = _key;
-            aes.Mode = CipherMode.CBC;
-            aes.Padding = PaddingMode.PKCS7;
-            aes.GenerateIV(); // Генерируем корректный IV (16 байт)
+            if (key.Length != 32)
+                throw new ArgumentException("Key must be 256-bit (32 bytes)");
 
-            using var encryptor = aes.CreateEncryptor();
-            byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
-            byte[] cipherBytes = encryptor.TransformFinalBlock(plainBytes, 0, plainBytes.Length);
-
-            return (
-                Convert.ToBase64String(cipherBytes),
-                Convert.ToBase64String(aes.IV) // IV всегда 16 байт -> 24 символа base64
-            );
+            _key = key;
         }
 
-        public string Decrypt(string cipherText, string iv)
+        public (string cipherText, string iv) Encrypt(string plainText)
         {
-            // Проверка длины IV перед использованием
-            byte[] ivBytes = Convert.FromBase64String(iv);
-            if (ivBytes.Length != IV_SIZE)
+            using (Aes aes = Aes.Create())
             {
-                throw new ArgumentException(
-                    $"Недопустимая длина IV: {ivBytes.Length} байт. Требуется: {IV_SIZE} байт");
+                aes.Key = _key;
+                aes.GenerateIV();
+                aes.Mode = CipherMode.CBC;
+                aes.Padding = PaddingMode.PKCS7;
+
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+
+                byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
+                byte[] cipherBytes = encryptor.TransformFinalBlock(plainBytes, 0, plainBytes.Length);
+
+                return (
+                    Convert.ToBase64String(cipherBytes),
+                    Convert.ToBase64String(aes.IV)
+                );
             }
+        }
 
-            using var aes = Aes.Create();
-            aes.Key = _key;
-            aes.IV = ivBytes;
-            aes.Mode = CipherMode.CBC;
-            aes.Padding = PaddingMode.PKCS7;
+        public string Decrypt(string cipherText, string ivBase64)
+        {
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = _key;
+                aes.IV = Convert.FromBase64String(ivBase64);
+                aes.Mode = CipherMode.CBC;
+                aes.Padding = PaddingMode.PKCS7;
 
-            using var decryptor = aes.CreateDecryptor();
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
-            byte[] plainBytes = decryptor.TransformFinalBlock(cipherBytes, 0, cipherBytes.Length);
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
-            return Encoding.UTF8.GetString(plainBytes);
+                byte[] cipherBytes = Convert.FromBase64String(cipherText);
+                byte[] plainBytes = decryptor.TransformFinalBlock(cipherBytes, 0, cipherBytes.Length);
+
+                return Encoding.UTF8.GetString(plainBytes);
+            }
         }
     }
 }

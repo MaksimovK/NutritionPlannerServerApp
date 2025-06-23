@@ -12,8 +12,8 @@ using NutritionPlanner.DataAccess;
 namespace NutritionPlanner.DataAccess.Migrations
 {
     [DbContext(typeof(NutritionPlannerDbContext))]
-    [Migration("20250623173159_AddBlockReasonUsers")]
-    partial class AddBlockReasonUsers
+    [Migration("20250623202618_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,6 +95,11 @@ namespace NutritionPlanner.DataAccess.Migrations
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("IV")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("character varying(24)");
 
                     b.Property<bool>("IsRead")
                         .HasColumnType("boolean");

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NutritionPlanner.DataAccess.Entities
 {
@@ -35,8 +30,7 @@ namespace NutritionPlanner.DataAccess.Entities
         [ForeignKey("ReceiverId")]
         public virtual UserEntity Receiver { get; set; }
 
-        //[Required]
-        //[StringLength(24)] // IV всегда 16 байт -> base64 = 24 символа
-        //public string IV { get; set; } // Вектор инициализации
+        [StringLength(24)] // IV всегда 16 байт -> base64 = 24 символа
+        public string IV { get; set; } // Вектор инициализации
     }
 }
