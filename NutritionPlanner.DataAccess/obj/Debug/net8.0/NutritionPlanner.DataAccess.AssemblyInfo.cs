@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NutritionPlanner.DataAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1fce1ef9fa9bbb94b729fbe9319218fce540783a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aecba9f668bfb09c5736ac36d78c79e2e36d0a87")]
 [assembly: System.Reflection.AssemblyProductAttribute("NutritionPlanner.DataAccess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NutritionPlanner.DataAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

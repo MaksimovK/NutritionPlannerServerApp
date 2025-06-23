@@ -3,6 +3,46 @@
   "WorkspaceRootPath": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{60E289A7-1A00-4BCC-B183-C098CABB89EA}|NutritionPlanner\\NutritionPlanner.API.csproj|c:\\projects\\nutritionplannerproject\\backend\\nutritionplanner\\nutritionplanner\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60E289A7-1A00-4BCC-B183-C098CABB89EA}|NutritionPlanner\\NutritionPlanner.API.csproj|solutionrelative:nutritionplanner\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0770F7A-33BE-4C10-82D5-258E06BBB6FC}|NutritionPlanner.Application\\NutritionPlanner.Application.csproj|c:\\projects\\nutritionplannerproject\\backend\\nutritionplanner\\nutritionplanner.application\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0770F7A-33BE-4C10-82D5-258E06BBB6FC}|NutritionPlanner.Application\\NutritionPlanner.Application.csproj|solutionrelative:nutritionplanner.application\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FB10270-4EB2-4275-ACF9-AB37D7686AFB}|NutritionPlanner.DataAccess\\NutritionPlanner.DataAccess.csproj|c:\\projects\\nutritionplannerproject\\backend\\nutritionplanner\\nutritionplanner.dataaccess\\entities\\chatmessageentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5FB10270-4EB2-4275-ACF9-AB37D7686AFB}|NutritionPlanner.DataAccess\\NutritionPlanner.DataAccess.csproj|solutionrelative:nutritionplanner.dataaccess\\entities\\chatmessageentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FB10270-4EB2-4275-ACF9-AB37D7686AFB}|NutritionPlanner.DataAccess\\NutritionPlanner.DataAccess.csproj|c:\\projects\\nutritionplannerproject\\backend\\nutritionplanner\\nutritionplanner.dataaccess\\repositories\\chatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5FB10270-4EB2-4275-ACF9-AB37D7686AFB}|NutritionPlanner.DataAccess\\NutritionPlanner.DataAccess.csproj|solutionrelative:nutritionplanner.dataaccess\\repositories\\chatrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7ADAB1B-DB1C-4094-AB9D-9AD06A8942F9}|NutritionPlanner.Core\\NutritionPlanner.Core.csproj|c:\\projects\\nutritionplannerproject\\backend\\nutritionplanner\\nutritionplanner.core\\models\\chatmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7ADAB1B-DB1C-4094-AB9D-9AD06A8942F9}|NutritionPlanner.Core\\NutritionPlanner.Core.csproj|solutionrelative:nutritionplanner.core\\models\\chatmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B7ADAB1B-DB1C-4094-AB9D-9AD06A8942F9}|NutritionPlanner.Core\\NutritionPlanner.Core.csproj|c:\\projects\\nutritionplannerproject\\backend\\nutritionplanner\\nutritionplanner.core\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B7ADAB1B-DB1C-4094-AB9D-9AD06A8942F9}|NutritionPlanner.Core\\NutritionPlanner.Core.csproj|solutionrelative:nutritionplanner.core\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FB10270-4EB2-4275-ACF9-AB37D7686AFB}|NutritionPlanner.DataAccess\\NutritionPlanner.DataAccess.csproj|c:\\projects\\nutritionplannerproject\\backend\\nutritionplanner\\nutritionplanner.dataaccess\\entities\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5FB10270-4EB2-4275-ACF9-AB37D7686AFB}|NutritionPlanner.DataAccess\\NutritionPlanner.DataAccess.csproj|solutionrelative:nutritionplanner.dataaccess\\entities\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60E289A7-1A00-4BCC-B183-C098CABB89EA}|NutritionPlanner\\NutritionPlanner.API.csproj|c:\\projects\\nutritionplannerproject\\backend\\nutritionplanner\\nutritionplanner\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60E289A7-1A00-4BCC-B183-C098CABB89EA}|NutritionPlanner\\NutritionPlanner.API.csproj|solutionrelative:nutritionplanner\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0770F7A-33BE-4C10-82D5-258E06BBB6FC}|NutritionPlanner.Application\\NutritionPlanner.Application.csproj|c:\\projects\\nutritionplannerproject\\backend\\nutritionplanner\\nutritionplanner.application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0770F7A-33BE-4C10-82D5-258E06BBB6FC}|NutritionPlanner.Application\\NutritionPlanner.Application.csproj|solutionrelative:nutritionplanner.application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FB10270-4EB2-4275-ACF9-AB37D7686AFB}|NutritionPlanner.DataAccess\\NutritionPlanner.DataAccess.csproj|c:\\projects\\nutritionplannerproject\\backend\\nutritionplanner\\nutritionplanner.dataaccess\\repositories\\usersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5FB10270-4EB2-4275-ACF9-AB37D7686AFB}|NutritionPlanner.DataAccess\\NutritionPlanner.DataAccess.csproj|solutionrelative:nutritionplanner.dataaccess\\repositories\\usersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A0770F7A-33BE-4C10-82D5-258E06BBB6FC}|NutritionPlanner.Application\\NutritionPlanner.Application.csproj|c:\\projects\\nutritionplannerproject\\backend\\nutritionplanner\\nutritionplanner.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A0770F7A-33BE-4C10-82D5-258E06BBB6FC}|NutritionPlanner.Application\\NutritionPlanner.Application.csproj|solutionrelative:nutritionplanner.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,19 +67,149 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ChatController.cs",
+              "DocumentMoniker": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner\\Controllers\\ChatController.cs",
+              "RelativeDocumentMoniker": "NutritionPlanner\\Controllers\\ChatController.cs",
+              "ToolTip": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner\\Controllers\\ChatController.cs",
+              "RelativeToolTip": "NutritionPlanner\\Controllers\\ChatController.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAkwFoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T19:50:55.934Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatService.cs",
+              "DocumentMoniker": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.Application\\Services\\ChatService.cs",
+              "RelativeDocumentMoniker": "NutritionPlanner.Application\\Services\\ChatService.cs",
+              "ToolTip": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.Application\\Services\\ChatService.cs",
+              "RelativeToolTip": "NutritionPlanner.Application\\Services\\ChatService.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAYwFgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T19:50:52.055Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ChatMessageEntity.cs",
+              "DocumentMoniker": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.DataAccess\\Entities\\ChatMessageEntity.cs",
+              "RelativeDocumentMoniker": "NutritionPlanner.DataAccess\\Entities\\ChatMessageEntity.cs",
+              "ToolTip": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.DataAccess\\Entities\\ChatMessageEntity.cs",
+              "RelativeToolTip": "NutritionPlanner.DataAccess\\Entities\\ChatMessageEntity.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAIwCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T19:50:44.532Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ChatRepository.cs",
+              "DocumentMoniker": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.DataAccess\\Repositories\\ChatRepository.cs",
+              "RelativeDocumentMoniker": "NutritionPlanner.DataAccess\\Repositories\\ChatRepository.cs",
+              "ToolTip": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.DataAccess\\Repositories\\ChatRepository.cs",
+              "RelativeToolTip": "NutritionPlanner.DataAccess\\Repositories\\ChatRepository.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAkwEUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T19:50:40.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChatMessage.cs",
+              "DocumentMoniker": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.Core\\Models\\ChatMessage.cs",
+              "RelativeDocumentMoniker": "NutritionPlanner.Core\\Models\\ChatMessage.cs",
+              "ToolTip": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.Core\\Models\\ChatMessage.cs",
+              "RelativeToolTip": "NutritionPlanner.Core\\Models\\ChatMessage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T19:50:32.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.Core\\Models\\User.cs",
+              "RelativeDocumentMoniker": "NutritionPlanner.Core\\Models\\User.cs",
+              "ToolTip": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.Core\\Models\\User.cs",
+              "RelativeToolTip": "NutritionPlanner.Core\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T19:48:30.794Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserEntity.cs",
+              "DocumentMoniker": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.DataAccess\\Entities\\UserEntity.cs",
+              "RelativeDocumentMoniker": "NutritionPlanner.DataAccess\\Entities\\UserEntity.cs",
+              "ToolTip": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.DataAccess\\Entities\\UserEntity.cs",
+              "RelativeToolTip": "NutritionPlanner.DataAccess\\Entities\\UserEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T19:48:22.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UsersRepository.cs",
+              "DocumentMoniker": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.DataAccess\\Repositories\\UsersRepository.cs",
+              "RelativeDocumentMoniker": "NutritionPlanner.DataAccess\\Repositories\\UsersRepository.cs",
+              "ToolTip": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.DataAccess\\Repositories\\UsersRepository.cs",
+              "RelativeToolTip": "NutritionPlanner.DataAccess\\Repositories\\UsersRepository.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAUwDwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T19:33:11.992Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "NutritionPlanner\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "NutritionPlanner\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAAwGYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T19:32:54.339Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.Application\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "NutritionPlanner.Application\\Services\\UserService.cs",
+              "ToolTip": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.Application\\Services\\UserService.cs",
+              "RelativeToolTip": "NutritionPlanner.Application\\Services\\UserService.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAAAFsAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T19:32:24.928Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.Application\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "NutritionPlanner.Application\\Services\\AuthService.cs",
               "ToolTip": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner.Application\\Services\\AuthService.cs",
               "RelativeToolTip": "NutritionPlanner.Application\\Services\\AuthService.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAUwD8AAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAUwD8AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-23T18:05:31.853Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 11,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Projects\\NutritionPlannerProject\\backend\\NutritionPlanner\\NutritionPlanner\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "NutritionPlanner\\Controllers\\AuthController.cs",
@@ -47,8 +217,7 @@
               "RelativeToolTip": "NutritionPlanner\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAAAowFYAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T18:05:27.005Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-23T18:05:27.005Z"
             }
           ]
         }

@@ -15,6 +15,6 @@
         public Role Role { get; set; }
         public bool IsBlocked { get; set; }
         public DateTime? BlockedUntil { get; set; }
-        public string BlockReason { get; set; }
+        public string? BlockReason { get; set; }
     }
 }
