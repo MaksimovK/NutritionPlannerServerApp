@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NutritionPlanner.Core.Models;
 using NutritionPlanner.DataAccess.Entities;
 
 namespace NutritionPlanner.DataAccess

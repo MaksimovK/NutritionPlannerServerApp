@@ -12,7 +12,7 @@ using NutritionPlanner.DataAccess;
 namespace NutritionPlanner.DataAccess.Migrations
 {
     [DbContext(typeof(NutritionPlannerDbContext))]
-    [Migration("20250623202618_Initial")]
+    [Migration("20250624014444_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

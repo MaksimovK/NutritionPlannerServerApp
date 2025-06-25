@@ -1,6 +1,7 @@
 ﻿using NutritionPlanner.Core.Models;
 using NutritionPlanner.DataAccess.Repositories.Interfaces;
 using NutritionPlanner.DataAccess.Entities;
+using System;
 
 namespace NutritionPlanner.Application.Services
 {
@@ -29,8 +30,6 @@ namespace NutritionPlanner.Application.Services
                     ProteinConsumed = progress.ProteinConsumed,
                     FatConsumed = progress.FatConsumed,
                     CarbohydratesConsumed = progress.CarbohydratesConsumed,
-                    WaterConsumed = progress.WaterConsumed,
-                    ActivityMinutes = progress.ActivityMinutes
                 });
             }
             return result;
@@ -38,42 +37,36 @@ namespace NutritionPlanner.Application.Services
 
         public async Task<int> AddUserProgressAsync(UserProgress progress)
         {
-            var exists = await _repository.ExistsAsync(progress.UserId, progress.Date);
-
-            if (exists)
+            // Пытаемся найти существующий прогресс для этого пользователя на эту дату
+            var existingProgress = await _repository.GetProgressByUserIdAndDateAsync(progress.UserId, progress.Date);
+            if (existingProgress != null)
             {
-                var existing = await _repository.GetProgressByUserIdAndDateAsync(progress.UserId, progress.Date);
+                // Если прогресс есть, обновляем его
+                existingProgress.CaloriesConsumed = progress.CaloriesConsumed;
+                existingProgress.ProteinConsumed = progress.ProteinConsumed;
+                existingProgress.FatConsumed = progress.FatConsumed;
+                existingProgress.CarbohydratesConsumed = progress.CarbohydratesConsumed;
+                // Здесь можно обновить и другие параметры (вода, активность)
 
-                // Обновляем существующую запись
-                existing.Weight = progress.Weight;
-                existing.CaloriesConsumed = progress.CaloriesConsumed;
-                existing.ProteinConsumed = progress.ProteinConsumed;
-                existing.FatConsumed = progress.FatConsumed;
-                existing.CarbohydratesConsumed = progress.CarbohydratesConsumed;
-                existing.WaterConsumed = progress.WaterConsumed;
-                existing.ActivityMinutes = progress.ActivityMinutes;
-
-                await _repository.UpdateAsync(existing);
-                return existing.Id;
+                await _repository.UpdateAsync(existingProgress);
+                return existingProgress.Id;
             }
             else
             {
-                // Создаем новую запись
+                // Если прогресса нет, создаем новый
                 var progressEntity = new UserProgressEntity
                 {
                     UserId = progress.UserId,
                     Date = progress.Date,
-                    Weight = progress.Weight,
                     CaloriesConsumed = progress.CaloriesConsumed,
                     ProteinConsumed = progress.ProteinConsumed,
                     FatConsumed = progress.FatConsumed,
                     CarbohydratesConsumed = progress.CarbohydratesConsumed,
-                    WaterConsumed = progress.WaterConsumed,
-                    ActivityMinutes = progress.ActivityMinutes
-                };
+                    // Добавь другие поля
+                }; 
 
                 return await _repository.CreateAsync(progressEntity);
-            }
+}
         }
 
         public async Task<UserProgress> GetProgressByUserIdAndDateAsync(Guid userId, DateOnly date)
@@ -91,8 +84,6 @@ namespace NutritionPlanner.Application.Services
                 ProteinConsumed = progressEntity.ProteinConsumed,
                 FatConsumed = progressEntity.FatConsumed,
                 CarbohydratesConsumed = progressEntity.CarbohydratesConsumed,
-                WaterConsumed = progressEntity.WaterConsumed,
-                ActivityMinutes = progressEntity.ActivityMinutes
             };
         }
 

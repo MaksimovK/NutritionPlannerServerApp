@@ -8,7 +8,6 @@ using NutritionPlanner.Application.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.ComponentModel.DataAnnotations;
 using NutritionPlanner.Core.Models;
-using NutritionPlanner.DataAccess.Repositories;
 
 namespace NutritionPlanner.Application.Services
 {

@@ -91,7 +91,7 @@ builder.Services.AddSwaggerGen(c => {
     // Добавьте поддержку HTTPS
     c.AddServer(new OpenApiServer
     {
-        Url = "http://192.168.0.195:7086",
+        Url = "http://192.168.120.35:7086",
         Description = "(HTTPS)"
     });
 
